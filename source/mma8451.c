@@ -40,7 +40,7 @@ void read_full_xyz(void){
 	acc_y = temp[1]/4;
 	acc_z = temp[2]/4;
 
-	printf("X: %d | Y: %d | Z: %d\r\n", acc_x, acc_y, acc_z);
+//	printf("X: %d | Y: %d | Z: %d\r\n", acc_x, acc_y, acc_z);
 }
 
 
@@ -52,4 +52,28 @@ void read_xyz(void){
 	//100ms delay
 	delay(100);
 	acc_z = (int8_t)i2c_read_byte(MMA_ADDR, REG_ZHI);
+}
+
+void calibrate(int16_t *xval, int16_t *yval, int16_t *zval, int *xavg, int *yavg, int *zavg){
+	int sum = 0, sum1 = 0, sum2 = 0;
+	for(int i = 0; i<100; i++){
+		read_full_xyz();
+		xval[i] = acc_x;
+		sum = xval[i] + sum;
+
+		yval[i] = acc_y;
+		sum1 = yval[i] + sum1;
+
+		zval[i] = acc_z;
+		sum2 = zval[i] + sum2;
+	}
+	delay(100);
+	*xavg = sum/100;
+	printf("avg X: %d\r\n", *xavg);
+
+	*yavg = sum1/100;
+	printf("avg Y: %d\r\n", *yavg);
+
+	*zavg = sum2/100;
+	printf("avg Z: %d\r\n", *zavg);
 }

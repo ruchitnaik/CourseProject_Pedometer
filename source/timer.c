@@ -23,6 +23,7 @@ void init_systick(void){
 	SysTick->VAL = 0;								//Force reloading the counter value
 	SysTick->CTRL = SysTick_CTRL_TICKINT_Msk |		//Enable Systick timer
 					SysTick_CTRL_ENABLE_Msk;
+	NVIC_EnableIRQ(SysTick_IRQn);					//Enable Systick timer interrupt
 }
 
 /**
@@ -84,6 +85,7 @@ ticktime_t getTicks(){
  */
 void delay(uint16_t delay_time){
 	uint32_t current_time = getTicks();
-	while((getTicks() - current_time) >= delay_time){
+	while((getTicks() - current_time) <= delay_time){
+		__asm volatile ("nop");
 	}
 }

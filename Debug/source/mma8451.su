@@ -1,3 +1,4 @@
 ../source/mma8451.c:12:5:init_mma	8	static
 ../source/mma8451.c:19:6:read_full_xyz	32	static
 ../source/mma8451.c:47:6:read_xyz	8	static
+../source/mma8451.c:57:6:calibrate	40	static

@@ -33,5 +33,6 @@
 int init_mma(void);
 void read_full_xyz(void);
 void read_xyz(void);
+void calibrate(int16_t *xval, int16_t *yval, int16_t *zval, int *xavg, int *yavg, int *zavg);
 
 #endif /* MMA8451_H_ */

@@ -40,22 +40,17 @@
 #include "MKL25Z4.h"
 #include "fsl_debug_console.h"
 /* TODO: insert other include files here. */
-#include <stdbool.h>
-#include <math.h>
 #include "mma8451.h"
 #include "timer.h"
-#include "i2c.h"
+#include "utility.h"
 /* TODO: insert other definitions and declarations here. */
-#define	STEP_THRESHOLD	4500
-
 int16_t xval[100] = {0};
 int16_t yval[100] = {0};
 int16_t zval[100] = {0};
 int xavg, yavg, zavg;
-bool step_flag = false;
+int16_t total_vect[100] = {0};
+int16_t total_avg[100] = {0};
 uint16_t step_count = 0;
-
-extern int16_t acc_x, acc_y, acc_z;
 
 /*
  * @brief   Application entry point.
@@ -85,46 +80,20 @@ int main(void) {
     PRINTF("Calibration completed\r\n");
     PRINTF("Avg Values X: %d, Y: %d, Z: %d\r\n", xavg, yavg, zavg);
 
-    //Resetting the buffer to 0
-    for(int i=0; i<100; i++){
-        xval[i] = 0;
-        yval[i] = 0;
-        zval[i] = 0;
-    }
-    int16_t total_vect[100] = {0};
-    int16_t total_avg[100] = {0};
+//    //Resetting the buffer to 0
+//    for(int i=0; i<100; i++){
+//        xval[i] = 0;
+//        yval[i] = 0;
+//        zval[i] = 0;
+//    }
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
     while(1) {
         i++ ;
-        /* 'Dummy' NOP to allow source level single stepping of
-            tight while() loop */
-//        for(int ind=0; ind<100; i++){
         if(i<100){
-        	read_full_xyz();
-
-//        	total_vect[ind] = sqrt(((xval[ind] - xavg) * (xval[ind] - xavg)) + ((yval[ind] - yavg) *
-//        						(yval[ind] - yavg)) + ((zval[ind] - zavg) * (zval[ind] - zavg)));
-        	total_vect[i] = sqrt(((acc_x - xavg) * (acc_x - xavg)) + ((acc_y - yavg) *
-        						(acc_y - yavg)) + ((acc_z - zavg) * (acc_z - zavg)));
-
-        	total_avg[i] = (total_vect[i] + total_vect[i - 1]) / 2 ;
-        	PRINTF("Movement val: %d\r\n", total_avg[i]);
-        	delay(100);
-        	if((total_avg[i] > STEP_THRESHOLD) && (step_flag == false)){
-        		step_count++;
-        		step_flag = true;
-        	}
-        	else if((total_avg[i] > STEP_THRESHOLD) && (step_flag == true)){
-        		//Don't count
-        		__asm volatile ("nop");
-        	}
-
-        	if((total_avg[i] < STEP_THRESHOLD) && (step_flag == true)){
-        		step_flag = false;
-        	}
+        	step_count = detect_step(step_count, i);
         	PRINTF("STEPS: %d\r\n", step_count);
         }
         else{

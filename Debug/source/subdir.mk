@@ -8,21 +8,24 @@ C_SRCS += \
 ../source/i2c.c \
 ../source/mma8451.c \
 ../source/mtb.c \
-../source/semihost_hardfault.c 
+../source/semihost_hardfault.c \
+../source/timer.c 
 
 OBJS += \
 ./source/Course_Project.o \
 ./source/i2c.o \
 ./source/mma8451.o \
 ./source/mtb.o \
-./source/semihost_hardfault.o 
+./source/semihost_hardfault.o \
+./source/timer.o 
 
 C_DEPS += \
 ./source/Course_Project.d \
 ./source/i2c.d \
 ./source/mma8451.d \
 ./source/mtb.d \
-./source/semihost_hardfault.d 
+./source/semihost_hardfault.d \
+./source/timer.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

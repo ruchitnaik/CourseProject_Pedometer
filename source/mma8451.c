@@ -39,13 +39,17 @@ void read_full_xyz(void){
 	acc_x = temp[0]/4;
 	acc_y = temp[1]/4;
 	acc_z = temp[2]/4;
+
+	printf("X: %d | Y: %d | Z: %d\r\n", acc_x, acc_y, acc_z);
 }
 
 
 void read_xyz(void){
 	acc_x = (int8_t)i2c_read_byte(MMA_ADDR, REG_XHI);
 	//100ms delay
+	delay(100);
 	acc_y = (int8_t)i2c_read_byte(MMA_ADDR, REG_YHI);
 	//100ms delay
+	delay(100);
 	acc_z = (int8_t)i2c_read_byte(MMA_ADDR, REG_ZHI);
 }

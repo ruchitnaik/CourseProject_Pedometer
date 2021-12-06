@@ -9,8 +9,10 @@
 #define MMA8451_H_
 
 #include <stdint.h>
+#include <stdio.h>
 #include "MKL25Z4.h"
 #include "mma8451.h"
+#include "timer.h"
 #include "i2c.h"
 
 #define MMA_ADDR 0x3A

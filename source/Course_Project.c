@@ -40,7 +40,9 @@
 #include "MKL25Z4.h"
 #include "fsl_debug_console.h"
 /* TODO: insert other include files here. */
-
+#include "mma8451.h"
+#include "timer.h"
+#include "i2c.h"
 /* TODO: insert other definitions and declarations here. */
 
 /*
@@ -56,8 +58,14 @@ int main(void) {
     /* Init FSL debug console. */
     BOARD_InitDebugConsole();
 #endif
+    PRINTF("Initialization in progress...\n");
 
-    PRINTF("Hello World\n");
+    I2C_init();
+    if(!init_mma()){				//Initialize accelerometer hardware
+    	while(1);
+    }
+
+    PRINTF("Initialization completed\n");
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
@@ -66,6 +74,9 @@ int main(void) {
         i++ ;
         /* 'Dummy' NOP to allow source level single stepping of
             tight while() loop */
+
+        read_full_xyz();
+
         __asm volatile ("nop");
     }
     return 0 ;

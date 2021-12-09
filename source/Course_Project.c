@@ -43,6 +43,7 @@
 #include "mma8451.h"
 #include "timer.h"
 #include "utility.h"
+#include "lcd.h"
 /* TODO: insert other definitions and declarations here. */
 int16_t xval[100] = {0};
 int16_t yval[100] = {0};
@@ -72,13 +73,17 @@ int main(void) {
     if(!init_mma()){				//Initialize accelerometer hardware
     	while(1);
     }
-
+    lcd_init();
     PRINTF("Initialization completed\r\n");
     PRINTF("***************************************\r\n");
     PRINTF("calibrating....\r\n");
     calibrate(xval, yval, zval, &xavg, &yavg, &zavg);
     PRINTF("Calibration completed\r\n");
     PRINTF("Avg Values X: %d, Y: %d, Z: %d\r\n", xavg, yavg, zavg);
+
+    start_lcd();
+    lcd_data_write("My PEDO", LCD_LINE1);
+    lcd_data_write("Version 1.0", LCD_LINE2);
 
 //    //Resetting the buffer to 0
 //    for(int i=0; i<100; i++){
@@ -95,6 +100,8 @@ int main(void) {
         if(i<100){
         	step_count = detect_step(step_count, i);
         	PRINTF("STEPS: %d\r\n", step_count);
+        	lcd_data_write("STEPS:", LCD_LINE1);
+        	lcd_data_write_int(step_count, LCD_LINE2);
         }
         else{
         	i=0;

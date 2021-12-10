@@ -7,7 +7,8 @@
 
 #include "utility.h"
 
-#define	STEP_THRESHOLD	4500
+#define	STEP_THRESHOLD			2500
+#define STEP_CHANGE_THRESHOLD	750
 
 extern int16_t xval[100];
 extern int16_t yval[100];
@@ -38,7 +39,7 @@ uint16_t detect_step(uint16_t count, int i){
 		__asm volatile ("nop");
 	}
 
-	if((total_avg[i] < STEP_THRESHOLD) && (step_flag == true)){
+	if(((total_avg[i] - total_avg[i-1]) > STEP_CHANGE_THRESHOLD) && (step_flag == true)){
 		step_flag = false;
 	}
 	return count;

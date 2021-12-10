@@ -23,7 +23,8 @@
 
 typedef enum{
 	LCD_LINE1,
-	LCD_LINE2
+	LCD_LINE2,
+	SAME_LINE
 }lcd_line;
 
 void lcd_init(void);

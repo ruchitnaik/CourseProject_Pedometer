@@ -99,9 +99,13 @@ void lcd_cmd(uint8_t cmd){
 
 void start_lcd(void){
 	lcd_cmd(0x02);								//Cursor on original position
+	delay(10);
 	lcd_cmd(0x28);								//Enable 4-bit, 2 line, 5x7 dots mode for characters
+	delay(10);
 	lcd_cmd(0x0C);								//Display ON, Cursor OFF
+	delay(10);
 	lcd_cmd(0x01);								//Clear display
+	delay(10);
 }
 
 uint8_t lcd_string_write(char **str){
@@ -126,6 +130,7 @@ uint8_t lcd_string_write(char **str){
 
 		(*str)++;								//Moving the pointer to next character
 		cnt++;
+		delay(10);
 	}
 	return cnt;
 }
@@ -143,6 +148,9 @@ void lcd_data_write(char *data, lcd_line line){
 	case LCD_LINE2:
 		lcd_cmd(0xC0);							//Move the cursor to the beginning of second line
 		break;
+
+	case SAME_LINE:								//Writes on the same line where the cursor currently is
+		break;
 	}
 
 	//Write data string to LCD (it returns how many characters are written)
@@ -155,8 +163,22 @@ void lcd_data_write(char *data, lcd_line line){
 
 
 void lcd_data_write_int(uint32_t num, lcd_line line){
-	uint8_t byte[10];							//Handle upto 10 digits
+	uint8_t byte[10] = {0};							//Handle upto 10 digits
 	uint8_t idx = 0;							//Index to preserve the state of byte array
+
+	//Set cursor to the specific line where it is to be writtern
+	switch(line){
+	case LCD_LINE1:
+		lcd_cmd(0x80);							//Move the cursor to the beginning of first line
+		break;
+
+	case LCD_LINE2:
+		lcd_cmd(0xC0);							//Move the cursor to the beginning of second line
+		break;
+
+	case SAME_LINE:								//Writes on the same line where the cursor currently is
+		break;
+	}
 
 	//Recovering each digit from the input
 	while(num != 0){
@@ -166,7 +188,7 @@ void lcd_data_write_int(uint32_t num, lcd_line line){
 	}
 
 	//Convert the decimal into ASCII and print on the LCD
-	for(int i=0; i<idx; i++){
+	for(int i=(idx - 1); i>=0; i--){
 		GPIOC->PDOR |= LCD_RS;					//Select data register
 		GPIOC->PDOR &= ~LCD_RW;					//Select write mode
 
@@ -181,5 +203,25 @@ void lcd_data_write_int(uint32_t num, lcd_line line){
 		delay(1);
 		GPIOC->PDOR &= ~LCD_E;					//EN = Low
 		delay(1);
+
+		delay(10);
+	}
+	if(idx == 0){
+		GPIOC->PDOR |= LCD_RS;					//Select data register
+		GPIOC->PDOR &= ~LCD_RW;					//Select write mode
+
+		write_nibble(('0'+byte[idx]) & 0xF0);		//Write upper nibble
+		GPIOC->PDOR |= LCD_E;					//EN = High
+		delay(1);
+		GPIOC->PDOR &= ~LCD_E;					//EN = Low
+		delay(1);
+
+		write_nibble((('0'+byte[idx]) << 4) & 0xF0);	//Write lower nibble
+		GPIOC->PDOR |= LCD_E;					//EN = High
+		delay(1);
+		GPIOC->PDOR &= ~LCD_E;					//EN = Low
+		delay(1);
+
+		delay(10);
 	}
 }

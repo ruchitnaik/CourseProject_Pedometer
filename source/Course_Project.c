@@ -82,16 +82,11 @@ int main(void) {
     PRINTF("Avg Values X: %d, Y: %d, Z: %d\r\n", xavg, yavg, zavg);
 
     start_lcd();
-    lcd_data_write("My PEDO", LCD_LINE1);
+    lcd_data_write("PEDOMETER", LCD_LINE1);
     lcd_data_write("Version 1.0", LCD_LINE2);
-
-//    //Resetting the buffer to 0
-//    for(int i=0; i<100; i++){
-//        xval[i] = 0;
-//        yval[i] = 0;
-//        zval[i] = 0;
-//    }
-
+	lcd_cmd(0x01);								//Clear display
+	delay(1000);
+	lcd_data_write("Counting Steps...", LCD_LINE2);
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
@@ -101,11 +96,10 @@ int main(void) {
         	step_count = detect_step(step_count, i);
         	PRINTF("STEPS: %d\r\n", step_count);
         	lcd_data_write("STEPS:", LCD_LINE1);
-        	lcd_data_write_int(step_count, LCD_LINE2);
+        	lcd_data_write_int(step_count, SAME_LINE);
         }
         else{
         	i=0;
-        	delay(1000);
         }
     }
     return 0 ;

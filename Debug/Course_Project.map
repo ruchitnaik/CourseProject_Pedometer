@@ -206,7 +206,7 @@ Discarded input sections
  .text          0x00000000        0x0 ./source/i2c.o
  .data          0x00000000        0x0 ./source/i2c.o
  .bss           0x00000000        0x0 ./source/i2c.o
- .text.i2c_read_byte
+ .text.I2C0_read_byte
                 0x00000000       0xc4 ./source/i2c.o
  .debug_macro   0x00000000      0xa8a ./source/i2c.o
  .debug_macro   0x00000000       0x10 ./source/i2c.o
@@ -1646,27 +1646,27 @@ END GROUP
  .text.get_flagSwitch
                 0x000008e4       0x14 ./source/button.o
                 0x000008e4                get_flagSwitch
- .text.I2C_init
+ .text.I2C0_init
                 0x000008f8       0x84 ./source/i2c.o
-                0x000008f8                I2C_init
- .text.i2c_busy
+                0x000008f8                I2C0_init
+ .text.I2C0_busy
                 0x0000097c      0x164 ./source/i2c.o
-                0x0000097c                i2c_busy
- .text.i2c_wait
+                0x0000097c                I2C0_busy
+ .text.I2C0_wait
                 0x00000ae0       0x6c ./source/i2c.o
-                0x00000ae0                i2c_wait
- .text.i2c_start
+                0x00000ae0                I2C0_wait
+ .text.I2C0_start
                 0x00000b4c       0x30 ./source/i2c.o
-                0x00000b4c                i2c_start
- .text.i2c_read_setup
+                0x00000b4c                I2C0_start
+ .text.I2C0_read_setup
                 0x00000b7c       0x68 ./source/i2c.o
-                0x00000b7c                i2c_read_setup
- .text.i2c_repeated_read
+                0x00000b7c                I2C0_read_setup
+ .text.I2C0_repeated_read
                 0x00000be4       0x80 ./source/i2c.o
-                0x00000be4                i2c_repeated_read
- .text.i2c_write_byte
+                0x00000be4                I2C0_repeated_read
+ .text.I2C0_write_byte
                 0x00000c64       0x80 ./source/i2c.o
-                0x00000c64                i2c_write_byte
+                0x00000c64                I2C0_write_byte
  .text.lcd_init
                 0x00000ce4       0xa0 ./source/lcd.o
                 0x00000ce4                lcd_init
@@ -2260,49 +2260,49 @@ END GROUP
 OUTPUT(Course_Project.axf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x883e
+.debug_info     0x00000000     0x883f
  .debug_info    0x00000000      0x8d2 ./utilities/fsl_debug_console.o
  .debug_info    0x000008d2      0x4eb ./startup/startup_mkl25z4.o
  .debug_info    0x00000dbd      0x304 ./source/Course_Project.o
  .debug_info    0x000010c1      0x72a ./source/button.o
  .debug_info    0x000017eb      0x531 ./source/i2c.o
- .debug_info    0x00001d1c      0x554 ./source/lcd.o
- .debug_info    0x00002270      0x21c ./source/mma8451.o
- .debug_info    0x0000248c       0x53 ./source/mtb.o
- .debug_info    0x000024df       0x3c ./source/semihost_hardfault.o
- .debug_info    0x0000251b      0x4b8 ./source/timer.o
- .debug_info    0x000029d3      0x329 ./source/tsi.o
- .debug_info    0x00002cfc      0x152 ./source/utility.o
- .debug_info    0x00002e4e     0x1a5a ./drivers/fsl_clock.o
- .debug_info    0x000048a8     0x140d ./drivers/fsl_lpsci.o
- .debug_info    0x00005cb5     0x13ae ./drivers/fsl_uart.o
- .debug_info    0x00007063      0x39b ./board/board.o
- .debug_info    0x000073fe      0xabc ./board/clock_config.o
- .debug_info    0x00007eba       0x3c ./board/peripherals.o
- .debug_info    0x00007ef6      0x547 ./board/pin_mux.o
- .debug_info    0x0000843d      0x401 ./CMSIS/system_MKL25Z4.o
+ .debug_info    0x00001d1c      0x555 ./source/lcd.o
+ .debug_info    0x00002271      0x21c ./source/mma8451.o
+ .debug_info    0x0000248d       0x53 ./source/mtb.o
+ .debug_info    0x000024e0       0x3c ./source/semihost_hardfault.o
+ .debug_info    0x0000251c      0x4b8 ./source/timer.o
+ .debug_info    0x000029d4      0x329 ./source/tsi.o
+ .debug_info    0x00002cfd      0x152 ./source/utility.o
+ .debug_info    0x00002e4f     0x1a5a ./drivers/fsl_clock.o
+ .debug_info    0x000048a9     0x140d ./drivers/fsl_lpsci.o
+ .debug_info    0x00005cb6     0x13ae ./drivers/fsl_uart.o
+ .debug_info    0x00007064      0x39b ./board/board.o
+ .debug_info    0x000073ff      0xabc ./board/clock_config.o
+ .debug_info    0x00007ebb       0x3c ./board/peripherals.o
+ .debug_info    0x00007ef7      0x547 ./board/pin_mux.o
+ .debug_info    0x0000843e      0x401 ./CMSIS/system_MKL25Z4.o
 
-.debug_abbrev   0x00000000     0x1d5e
+.debug_abbrev   0x00000000     0x1d6f
  .debug_abbrev  0x00000000      0x1e8 ./utilities/fsl_debug_console.o
  .debug_abbrev  0x000001e8      0x198 ./startup/startup_mkl25z4.o
  .debug_abbrev  0x00000380       0xc6 ./source/Course_Project.o
  .debug_abbrev  0x00000446      0x1af ./source/button.o
  .debug_abbrev  0x000005f5      0x179 ./source/i2c.o
- .debug_abbrev  0x0000076e      0x1c1 ./source/lcd.o
- .debug_abbrev  0x0000092f       0xf8 ./source/mma8451.o
- .debug_abbrev  0x00000a27       0x46 ./source/mtb.o
- .debug_abbrev  0x00000a6d       0x31 ./source/semihost_hardfault.o
- .debug_abbrev  0x00000a9e      0x1ee ./source/timer.o
- .debug_abbrev  0x00000c8c       0xfd ./source/tsi.o
- .debug_abbrev  0x00000d89       0xb2 ./source/utility.o
- .debug_abbrev  0x00000e3b      0x357 ./drivers/fsl_clock.o
- .debug_abbrev  0x00001192      0x2d7 ./drivers/fsl_lpsci.o
- .debug_abbrev  0x00001469      0x2f1 ./drivers/fsl_uart.o
- .debug_abbrev  0x0000175a      0x11b ./board/board.o
- .debug_abbrev  0x00001875      0x201 ./board/clock_config.o
- .debug_abbrev  0x00001a76       0x31 ./board/peripherals.o
- .debug_abbrev  0x00001aa7      0x189 ./board/pin_mux.o
- .debug_abbrev  0x00001c30      0x12e ./CMSIS/system_MKL25Z4.o
+ .debug_abbrev  0x0000076e      0x1d2 ./source/lcd.o
+ .debug_abbrev  0x00000940       0xf8 ./source/mma8451.o
+ .debug_abbrev  0x00000a38       0x46 ./source/mtb.o
+ .debug_abbrev  0x00000a7e       0x31 ./source/semihost_hardfault.o
+ .debug_abbrev  0x00000aaf      0x1ee ./source/timer.o
+ .debug_abbrev  0x00000c9d       0xfd ./source/tsi.o
+ .debug_abbrev  0x00000d9a       0xb2 ./source/utility.o
+ .debug_abbrev  0x00000e4c      0x357 ./drivers/fsl_clock.o
+ .debug_abbrev  0x000011a3      0x2d7 ./drivers/fsl_lpsci.o
+ .debug_abbrev  0x0000147a      0x2f1 ./drivers/fsl_uart.o
+ .debug_abbrev  0x0000176b      0x11b ./board/board.o
+ .debug_abbrev  0x00001886      0x201 ./board/clock_config.o
+ .debug_abbrev  0x00001a87       0x31 ./board/peripherals.o
+ .debug_abbrev  0x00001ab8      0x189 ./board/pin_mux.o
+ .debug_abbrev  0x00001c41      0x12e ./CMSIS/system_MKL25Z4.o
 
 .debug_aranges  0x00000000      0x908
  .debug_aranges
@@ -2432,29 +2432,29 @@ LOAD linker stubs
  .debug_macro   0x00009291       0x10 ./board/pin_mux.o
  .debug_macro   0x000092a1       0x94 ./CMSIS/system_MKL25Z4.o
 
-.debug_line     0x00000000     0x644d
+.debug_line     0x00000000     0x644f
  .debug_line    0x00000000      0x505 ./utilities/fsl_debug_console.o
  .debug_line    0x00000505      0x1ed ./startup/startup_mkl25z4.o
  .debug_line    0x000006f2      0x4ca ./source/Course_Project.o
  .debug_line    0x00000bbc      0x36a ./source/button.o
  .debug_line    0x00000f26      0x3dc ./source/i2c.o
  .debug_line    0x00001302      0x4b0 ./source/lcd.o
- .debug_line    0x000017b2      0x3e4 ./source/mma8451.o
- .debug_line    0x00001b96       0xd1 ./source/mtb.o
- .debug_line    0x00001c67       0x59 ./source/semihost_hardfault.o
- .debug_line    0x00001cc0      0x396 ./source/timer.o
- .debug_line    0x00002056      0x3db ./source/tsi.o
- .debug_line    0x00002431      0x34c ./source/utility.o
- .debug_line    0x0000277d     0x1302 ./drivers/fsl_clock.o
- .debug_line    0x00003a7f      0xd7b ./drivers/fsl_lpsci.o
- .debug_line    0x000047fa      0xd6a ./drivers/fsl_uart.o
- .debug_line    0x00005564      0x3c9 ./board/board.o
- .debug_line    0x0000592d      0x405 ./board/clock_config.o
- .debug_line    0x00005d32       0x5c ./board/peripherals.o
- .debug_line    0x00005d8e      0x38c ./board/pin_mux.o
- .debug_line    0x0000611a      0x333 ./CMSIS/system_MKL25Z4.o
+ .debug_line    0x000017b2      0x3e6 ./source/mma8451.o
+ .debug_line    0x00001b98       0xd1 ./source/mtb.o
+ .debug_line    0x00001c69       0x59 ./source/semihost_hardfault.o
+ .debug_line    0x00001cc2      0x396 ./source/timer.o
+ .debug_line    0x00002058      0x3db ./source/tsi.o
+ .debug_line    0x00002433      0x34c ./source/utility.o
+ .debug_line    0x0000277f     0x1302 ./drivers/fsl_clock.o
+ .debug_line    0x00003a81      0xd7b ./drivers/fsl_lpsci.o
+ .debug_line    0x000047fc      0xd6a ./drivers/fsl_uart.o
+ .debug_line    0x00005566      0x3c9 ./board/board.o
+ .debug_line    0x0000592f      0x405 ./board/clock_config.o
+ .debug_line    0x00005d34       0x5c ./board/peripherals.o
+ .debug_line    0x00005d90      0x38c ./board/pin_mux.o
+ .debug_line    0x0000611c      0x333 ./CMSIS/system_MKL25Z4.o
 
-.debug_str      0x00000000    0x35fab
+.debug_str      0x00000000    0x35fb3
  .debug_str     0x00000000    0x3142d ./utilities/fsl_debug_console.o
                               0x3167c (size before relaxing)
  .debug_str     0x0003142d      0x3cd ./startup/startup_mkl25z4.o
@@ -2463,37 +2463,37 @@ LOAD linker stubs
                               0x31d1a (size before relaxing)
  .debug_str     0x00032467      0x3a4 ./source/button.o
                               0x29093 (size before relaxing)
- .debug_str     0x0003280b       0xa8 ./source/i2c.o
-                              0x28dcb (size before relaxing)
- .debug_str     0x000328b3       0x95 ./source/lcd.o
+ .debug_str     0x0003280b       0xb0 ./source/i2c.o
+                              0x28dd3 (size before relaxing)
+ .debug_str     0x000328bb       0x95 ./source/lcd.o
                               0x28edd (size before relaxing)
- .debug_str     0x00032948       0x5a ./source/mma8451.o
+ .debug_str     0x00032950       0x5a ./source/mma8451.o
                               0x29039 (size before relaxing)
- .debug_str     0x000329a2      0x532 ./source/mtb.o
+ .debug_str     0x000329aa      0x532 ./source/mtb.o
                                0x3213 (size before relaxing)
- .debug_str     0x00032ed4       0x1f ./source/semihost_hardfault.o
+ .debug_str     0x00032edc       0x1f ./source/semihost_hardfault.o
                                0x2d00 (size before relaxing)
- .debug_str     0x00032ef3       0x7f ./source/timer.o
+ .debug_str     0x00032efb       0x7f ./source/timer.o
                               0x28f3e (size before relaxing)
- .debug_str     0x00032f72       0x4d ./source/tsi.o
+ .debug_str     0x00032f7a       0x4d ./source/tsi.o
                               0x30897 (size before relaxing)
- .debug_str     0x00032fbf       0x58 ./source/utility.o
+ .debug_str     0x00032fc7       0x58 ./source/utility.o
                               0x295b0 (size before relaxing)
- .debug_str     0x00033017     0x178e ./drivers/fsl_clock.o
+ .debug_str     0x0003301f     0x178e ./drivers/fsl_clock.o
                               0x321c8 (size before relaxing)
- .debug_str     0x000347a5      0x966 ./drivers/fsl_lpsci.o
+ .debug_str     0x000347ad      0x966 ./drivers/fsl_lpsci.o
                               0x317b7 (size before relaxing)
- .debug_str     0x0003510b      0x832 ./drivers/fsl_uart.o
+ .debug_str     0x00035113      0x832 ./drivers/fsl_uart.o
                               0x317da (size before relaxing)
- .debug_str     0x0003593d       0x4c ./board/board.o
+ .debug_str     0x00035945       0x4c ./board/board.o
                               0x3122a (size before relaxing)
- .debug_str     0x00035989      0x3c1 ./board/clock_config.o
+ .debug_str     0x00035991      0x3c1 ./board/clock_config.o
                               0x310f9 (size before relaxing)
- .debug_str     0x00035d4a       0x31 ./board/peripherals.o
+ .debug_str     0x00035d52       0x31 ./board/peripherals.o
                                0x2d11 (size before relaxing)
- .debug_str     0x00035d7b      0x1e1 ./board/pin_mux.o
+ .debug_str     0x00035d83      0x1e1 ./board/pin_mux.o
                               0x30840 (size before relaxing)
- .debug_str     0x00035f5c       0x4f ./CMSIS/system_MKL25Z4.o
+ .debug_str     0x00035f64       0x4f ./CMSIS/system_MKL25Z4.o
                               0x2fb42 (size before relaxing)
 
 .comment        0x00000000       0x4d
@@ -2808,10 +2808,22 @@ HardFault_Handler                                 ./source/semihost_hardfault.o
                                                   ./startup/startup_mkl25z4.o
 I2C0_DriverIRQHandler                             ./startup/startup_mkl25z4.o
 I2C0_IRQHandler                                   ./startup/startup_mkl25z4.o
+I2C0_busy                                         ./source/i2c.o
+I2C0_init                                         ./source/i2c.o
+                                                  ./source/Course_Project.o
+I2C0_read_byte                                    ./source/i2c.o
+                                                  ./source/mma8451.o
+I2C0_read_setup                                   ./source/i2c.o
+                                                  ./source/mma8451.o
+I2C0_repeated_read                                ./source/i2c.o
+                                                  ./source/mma8451.o
+I2C0_start                                        ./source/i2c.o
+                                                  ./source/mma8451.o
+I2C0_wait                                         ./source/i2c.o
+I2C0_write_byte                                   ./source/i2c.o
+                                                  ./source/mma8451.o
 I2C1_DriverIRQHandler                             ./startup/startup_mkl25z4.o
 I2C1_IRQHandler                                   ./startup/startup_mkl25z4.o
-I2C_init                                          ./source/i2c.o
-                                                  ./source/Course_Project.o
 InstallIRQHandler                                 ./drivers/fsl_common.o
 IntDefaultHandler                                 ./startup/startup_mkl25z4.o
 LLWU_DriverIRQHandler                             ./startup/startup_mkl25z4.o
@@ -3171,19 +3183,7 @@ getTicks                                          ./source/timer.o
 get_flagSwitch                                    ./source/button.o
                                                   ./source/Course_Project.o
 get_timer                                         ./source/timer.o
-i2c_busy                                          ./source/i2c.o
 i2c_lock                                          ./source/i2c.o
-i2c_read_byte                                     ./source/i2c.o
-                                                  ./source/mma8451.o
-i2c_read_setup                                    ./source/i2c.o
-                                                  ./source/mma8451.o
-i2c_repeated_read                                 ./source/i2c.o
-                                                  ./source/mma8451.o
-i2c_start                                         ./source/i2c.o
-                                                  ./source/mma8451.o
-i2c_wait                                          ./source/i2c.o
-i2c_write_byte                                    ./source/i2c.o
-                                                  ./source/mma8451.o
 init_mma                                          ./source/mma8451.o
                                                   ./source/Course_Project.o
 init_systick                                      ./source/timer.o

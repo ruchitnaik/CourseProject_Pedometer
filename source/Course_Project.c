@@ -71,7 +71,7 @@ int main(void) {
     PRINTF("Initialization in progress...\r\n");
 
     init_systick();
-    I2C_init();
+    I2C0_init();
     button_Init();
     TSI_Init();
     if(!init_mma()){				//Initialize accelerometer hardware

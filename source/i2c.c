@@ -3,6 +3,7 @@
  *
  *  Created on: Nov 29, 2021
  *      Author: Ruchit Naik
+ *       Brief: This file handles the I2C bare-metal code to handle I2C for KL25Z.
  *   Reference: https://www.nxp.com/docs/en/data-sheet/KL25P80M48SF0.pdf
  *   			https://www.nxp.com/downloads/en/schematics/FRDM-KL25Z_SCH_REV_E.pdf
  *   			https://documents.pub/document/kl25-sub-family-reference-manual-nxp-semiconductors-2018-12-20-kl25-sub-family.html
@@ -13,7 +14,13 @@
 int lock_detect = 0;
 int i2c_lock = 0;
 
-void I2C_init(void){
+/**
+ * @function I2C0_init
+ * @brief  	 Initialize the I2C0 module for KL25Z
+ * @param    none
+ * @return   none
+ */
+void I2C0_init(void){
 	//Enabling clock to I2C0 module and GPIO Port E
 	SIM->SCGC4 |= SIM_SCGC4_I2C0_MASK;
 	SIM->SCGC5 |= SIM_SCGC5_PORTE_MASK;
@@ -31,7 +38,13 @@ void I2C_init(void){
 	I2C0->C2 |= I2C_C2_HDRS_MASK;
 }
 
-void i2c_busy(void){
+/**
+ * @function I2C0_busy
+ * @brief  	 Initialize the I2C0 module for KL25Z
+ * @param    none
+ * @return   none
+ */
+void I2C0_busy(void){
 	lock_detect = 0;
 	I2C0->C1 &= ~I2C_C1_IICEN_MASK;
 	I2C0->C1 |= I2C_C1_TX_MASK;		//Set to transmit mode
@@ -66,41 +79,64 @@ void i2c_busy(void){
 	i2c_lock = 1;
 }
 
-
-void i2c_wait(void){
+/**
+ * @function I2C0_wait
+ * @brief  	 Wait for the I2C line to be cleared
+ * @param    none
+ * @return   none
+ */
+void I2C0_wait(void){
 	lock_detect = 0;
 	while(((I2C0->S & I2C_S_IICIF_MASK) == 0) & (lock_detect < 200)){
 		lock_detect++;
 	}
 	if(lock_detect >= 200){
-		i2c_busy();
+		I2C0_busy();
 	}
 	I2C0->S |= I2C_S_IICIF_MASK;
 }
 
-
-void i2c_start(void){
+/**
+ * @function I2C0_start
+ * @brief  	 Start I2C transfer
+ * @param    none
+ * @return   none
+ */
+void I2C0_start(void){
 	I2C0->C1 |= I2C_C1_TX_MASK;
 	I2C0->C1 |= I2C_C1_MST_MASK;
 }
 
-
-void i2c_read_setup(uint8_t dev, uint8_t address){
+/**
+ * @function I2C0_read_setup
+ * @brief  	 Set the registers to read the specific register address
+ * 			 from the specific device address.
+ * @param    dev		Device address from where the data is to be read
+ * 			 address	Address of the register from where the data
+ * 			 			is to be read
+ * @return   none
+ */
+void I2C0_read_setup(uint8_t dev, uint8_t address){
 	I2C0->D = dev;					//Send device address
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->D = address;				//Send read address
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->C1 |= I2C_C1_RSTA_MASK;	//Restart
 	I2C0->D = (dev|0x1);			//Send dev address (read)
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->C1 &= ~I2C_C1_TX_MASK;	//Set to receive mode
 }
 
-
-uint8_t i2c_repeated_read(uint8_t flag){
+/**
+ * @function I2C0_repeated_read
+ * @brief  	 configure the I2C0 for repeated read of registers
+ * @param    flag	flag which indicates repeated read is required or not
+ * @return   data which is read from the mentioned registered
+ */
+uint8_t I2C0_repeated_read(uint8_t flag){
 	uint8_t data;
 	lock_detect = 0;
 
@@ -112,7 +148,7 @@ uint8_t i2c_repeated_read(uint8_t flag){
 	}
 
 	data = I2C0->D;					//Backup read data locally
-	i2c_wait();
+	I2C0_wait();
 
 	if(flag){
 		I2C0->C1 &= ~I2C_C1_MST_MASK;
@@ -122,27 +158,34 @@ uint8_t i2c_repeated_read(uint8_t flag){
 	return data;
 }
 
-
-uint8_t i2c_read_byte(uint8_t dev, uint8_t address){
+/**
+ * @function I2C0_read_byte
+ * @brief  	 configure the I2C0 to read a single byte
+ * @param    dev		Device address from where the data is to be read
+ * 			 address	Address of the register from where the data
+ * 			 			is to be read
+ * @return   data that is read from the register
+ */
+uint8_t I2C0_read_byte(uint8_t dev, uint8_t address){
 	uint8_t data;
 
 	I2C0->C1 |= I2C_C1_TX_MASK;		//Set to transmit mode
 	I2C0->C1 &= ~I2C_C1_IICEN_MASK;	//Send start
 	I2C0->D = dev;					//Send device address
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->D = address;				//Send read address
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->C1 |= I2C_C1_RSTA_MASK;	//Repeated start
 	I2C0->D = (dev|0x1);			//Send development address - read
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->C1 &= ~I2C_C1_TX_MASK;	//Set to receive mode
 	I2C0->C1 |= I2C_C1_TXAK_MASK;	//Set NACK after read
 
 	data = I2C0->D;					//Read backup
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->C1 &= ~I2C_C1_MST_MASK;	//Send stop
 	data = I2C0->D;					//Read data
@@ -150,17 +193,25 @@ uint8_t i2c_read_byte(uint8_t dev, uint8_t address){
 	return data;
 }
 
-
-void i2c_write_byte(uint8_t dev, uint8_t address, uint8_t data){
+/**
+ * @function I2C0_write_byte
+ * @brief  	 configure the I2C0 to write a single byte
+ * @param    dev		Device address from where the data is to be read
+ * 			 address	Address of the register from where the data
+ * 			 			is to be read
+ * 			 data		Data which is to be written on the mentioned register
+ * @return   none
+ */
+void I2C0_write_byte(uint8_t dev, uint8_t address, uint8_t data){
 	I2C0->C1 |= I2C_C1_TX_MASK;		//Set to transmit mode
 	I2C0->C1 |= I2C_C1_MST_MASK;	//Send start
 	I2C0->D = dev;					//Send device address
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->D = address;				//Send write address
-	i2c_wait();
+	I2C0_wait();
 
 	I2C0->D = data;					//Send data
-	i2c_wait();
+	I2C0_wait();
 	I2C0->C1 &= ~I2C_C1_MST_MASK;	//Send stop bit
 }

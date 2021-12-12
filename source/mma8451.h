@@ -15,6 +15,9 @@
 #include "timer.h"
 #include "i2c.h"
 
+/************************************************
+ * MMA8451 registration configuration
+ ************************************************/
 #define MMA_ADDR 0x3A
 
 #define REG_XHI 0x01
@@ -30,9 +33,50 @@
 
 #define WHOAMI 0x1A
 
+/**
+ * @function init_mma
+ * @brief  	 Initialize accelerometer by writing the register
+ * 			 control register as 0x01.
+ * @param    none
+ * @return   none
+ */
 int init_mma(void);
+
+/**
+ * @function read_full_xyz
+ * @brief  	 Read acceleration measure for all the 3-axis
+ * 			 together.
+ * @param    none
+ * @return   none
+ */
 void read_full_xyz(void);
+
+/**
+ * @function read_xyz
+ * @brief  	 Read the register where the x, y and z-axis values
+ * 			 are stored.
+ * @param    none
+ * @return   none
+ */
 void read_xyz(void);
+
+/**
+ * @function calibrate
+ * @brief  	 Calibrates the reading of the accelerometer. The
+ * 			 function stores the value clearing the offset. It
+ * 			 returns the average values for all 3 axis to a
+ * 			 dedicated buffer.
+ * @param    xval[in]	pointer to buffer to store 100 values of
+ * 						x-axis.
+ * 			 yval[in]	pointer to buffer to store 100 values of
+ * 						y-axis.
+ * 			 zval[in]	pointer to buffer to store 100 values of
+ * 						z-axis.
+ * 			 xavg[out]	returns the average of acc. along x-axis
+ * 			 yavg[out]	returns the average of acc. along y-axis
+ * 			 zavg[out]	returns the average of acc. along z-axis
+ * @return   average values of acceleration along all the 3 axis
+ */
 void calibrate(int16_t *xval, int16_t *yval, int16_t *zval, int *xavg, int *yavg, int *zavg);
 
 #endif /* MMA8451_H_ */

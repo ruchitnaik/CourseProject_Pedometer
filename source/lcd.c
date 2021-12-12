@@ -14,6 +14,13 @@
 
 #include "lcd.h"
 
+/**
+ * @function lcd_init
+ * @brief  	 Initialize the GPIO to interface the 16x2 LCD over it.
+ * 			 GPIO port C is used for configuration
+ * @param    none
+ * @return   none
+ */
 void lcd_init(void){
 	//Enable clock to PORTC
 	SIM->SCGC5 |= SIM_SCGC5_PORTC(1);
@@ -32,7 +39,14 @@ void lcd_init(void){
 				LCD_DB4 | LCD_E | LCD_RS | LCD_RW);
 }
 
-
+/**
+ * @function write_nibble
+ * @brief  	 write 4 bits on the LCD DDRAM. The function handles
+ * 			 either upper or lower nibble to be written on DDRM.
+ * @param    nibble		The value of the nibble which is to be
+ * 						writtern on the register.
+ * @return   none
+ */
 void write_nibble(uint8_t nibble){
 	uint32_t gpio_temp;
 
@@ -74,7 +88,13 @@ void write_nibble(uint8_t nibble){
 	GPIOC->PDOR = gpio_temp;					//Write - Update data on GPIO Port C
 }
 
-
+/**
+ * @function lcd_cmd
+ * @brief  	 sends the command to the device. The command is
+ * 			 written directly on the memory.
+ * @param    cmd	command which is to be sent to the device.
+ * @return   none
+ */
 void lcd_cmd(uint8_t cmd){
 	GPIOC->PDOR &= ~LCD_RS;						//Select command register (RS=Low)
 	GPIOC->PDOR &= ~LCD_RW;						//Select write operation (RW=Low)
@@ -96,7 +116,16 @@ void lcd_cmd(uint8_t cmd){
 	delay(1);
 }
 
-
+/**
+ * @function start_lcd
+ * @brief  	 Function to send the commands to the LCD to get
+ * 			 the LCD in the desired original state. It mainly
+ * 			 sets the position of the cursor and set the mode
+ * 			 of operation of the LCD. It also clears the display
+ * 			 to start the program routine.
+ * @param    none
+ * @return   none
+ */
 void start_lcd(void){
 	lcd_cmd(0x02);								//Cursor on original position
 	delay(10);
@@ -108,11 +137,25 @@ void start_lcd(void){
 	delay(10);
 }
 
+/**
+ * @function clear_lcd
+ * @brief  	 Clears the LCD to display new screen clearly.
+ * @param    none
+ * @return   none
+ */
 void clear_lcd(void){
 	lcd_cmd(0x01);								//Clear display
 	delay(10);
 }
 
+/**
+ * @function lcd_string_write
+ * @brief  	 write the string on the display. It prints the
+ * 			 entire string on the LCD.
+ * @param    str	pointer to the char pointer which holds
+ * 					the string which needs to be printed
+ * @return   cnt	Count of data which is written on the LCD.
+ */
 uint8_t lcd_string_write(char **str){
 	uint8_t cnt = 0;							//Counting String length
 
@@ -140,6 +183,21 @@ uint8_t lcd_string_write(char **str){
 	return cnt;
 }
 
+/**
+ * @function lcd_data_write
+ * @brief  	 handles the string to be written on the LCD.
+ * 			 The function handles the line where it is to
+ * 			 be printed. It sets the courser to the desired
+ * 			 location and the character pointer to the string
+ * 			 which is to be printed
+ * @param    data	character pointer to the string which is to
+ * 					be printed
+ * 			 line	The line number where the data line is to be
+ * 			 		printed. It accepts datatype 'lcd_line'. If
+ * 			 		input is SAME_LINE, it retains the current
+ * 			 		cursor location.
+ * @return   none
+ */
 void lcd_data_write(char *data, lcd_line line){
 	uint8_t char_written;						//Actual no. of chars written on LCD
 	char *temp = " ";							//Space to be filled for unused blocks on line
@@ -166,7 +224,17 @@ void lcd_data_write(char *data, lcd_line line){
 	}
 }
 
-
+/**
+ * @function lcd_data_write_int
+ * @brief  	 function which handles to write integer on
+ * 			 the LCD. It converts the input integer to
+ * 			 ASCII to be printed on the LCD. It can handle
+ * 			 10 digit long number
+ * @param    num	Integer which is to be printed on screen
+ * 			 line	The enum which specifies the line number
+ * 			 		on which new message is to be printed.
+ * @return   none
+ */
 void lcd_data_write_int(uint32_t num, lcd_line line){
 	uint8_t byte[10] = {0};							//Handle upto 10 digits
 	uint8_t idx = 0;							//Index to preserve the state of byte array

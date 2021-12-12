@@ -68,7 +68,10 @@ int main(void) {
     /* Init FSL debug console. */
     BOARD_InitDebugConsole();
 #endif
-    PRINTF("Initialization in progress...\r\n");
+#ifdef DEBUG
+    PRINTF("WELCOME TO PEDOMETER MANUAL TESTING\r\n");
+    PRINTF("Initialization in progress...\r\n\n");
+#endif
 
     init_systick();
     I2C0_init();
@@ -78,12 +81,20 @@ int main(void) {
     	while(1);
     }
     lcd_init();
-    PRINTF("Initialization completed\r\n");
-    PRINTF("***************************************\r\n");
-    PRINTF("calibrating....\r\n");
+
+#ifdef DEBUG
+    PRINTF("Initialization completed\r\n\n");
+    PRINTF("****************************************************************\r\n");
+    PRINTF("calibrating....\r\n\n");
+#endif
     calibrate(xval, yval, zval, &xavg, &yavg, &zavg);
-    PRINTF("Calibration completed\r\n");
-    PRINTF("Avg Values X: %d, Y: %d, Z: %d\r\n", xavg, yavg, zavg);
+    delay(1000);
+
+#ifdef DEBUG
+    PRINTF("Calibration completed\r\n\n");
+    PRINTF("Calibrated avg values X: %d, Y: %d, Z: %d\r\n", xavg, yavg, zavg);
+    PRINTF("****************************************************************\r\n");
+#endif
 
     start_lcd();
     lcd_data_write("PEDOMETER", LCD_LINE1);
@@ -98,7 +109,9 @@ int main(void) {
         i++ ;
         if(i<100){
         	step_count = detect_step(step_count, i);
+#ifdef DEBUG
         	PRINTF("STEPS: %d\r\n", step_count);
+#endif
         	lcd_data_write("STEPS:", LCD_LINE1);
         	lcd_data_write_int(step_count, SAME_LINE);
         	lcd_data_write("Counting Steps...", LCD_LINE2);
@@ -108,7 +121,14 @@ int main(void) {
         }
         if((TSI_Detect()) || (get_flagSwitch())){
         	step_count = 0;
-        	PRINTF("Pedometer Reseted");
+#ifdef DEBUG
+        	if(get_flagSwitch()){
+        		PRINTF("Pedometer Reseted by Push Button\r\n");
+        	}
+        	else{
+        		PRINTF("Pedometer Reseted by TSI Touch\r\n");
+        	}
+#endif
         	clear_lcd();
             lcd_data_write("STEPS:", LCD_LINE1);
             lcd_data_write_int(step_count, SAME_LINE);

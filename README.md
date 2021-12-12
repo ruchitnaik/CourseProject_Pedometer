@@ -53,7 +53,7 @@ o Header connectors for evaluation board
 ## Manual Test Routine  
 To test the system, user can refer to the manual test case routine. The steps should be followed to visually check the functionality of the system. The test should be done on the ```Debug``` build to verify from the debug logs.   
 
-Refer to the test document [here]().
+Refer to the test document [here](https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Documentation/Manual%20Test%20Routine%20Guide.pdf).
 
 ## Project Demo  
 Please click on the link to access the video demo of the project [here]().  

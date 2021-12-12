@@ -108,6 +108,11 @@ void start_lcd(void){
 	delay(10);
 }
 
+void clear_lcd(void){
+	lcd_cmd(0x01);								//Clear display
+	delay(10);
+}
+
 uint8_t lcd_string_write(char **str){
 	uint8_t cnt = 0;							//Counting String length
 

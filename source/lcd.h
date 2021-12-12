@@ -31,6 +31,7 @@ void lcd_init(void);
 void write_nibble(uint8_t nibble);
 void lcd_cmd(uint8_t cmd);
 void start_lcd(void);
+void clear_lcd(void);
 uint8_t lcd_string_write(char **str);
 void lcd_data_write(char *data, lcd_line line);
 void lcd_data_write_int(uint32_t num, lcd_line line);

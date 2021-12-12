@@ -44,6 +44,8 @@
 #include "timer.h"
 #include "utility.h"
 #include "lcd.h"
+#include "button.h"
+#include "tsi.h"
 /* TODO: insert other definitions and declarations here. */
 int16_t xval[100] = {0};
 int16_t yval[100] = {0};
@@ -70,6 +72,8 @@ int main(void) {
 
     init_systick();
     I2C_init();
+    button_Init();
+    TSI_Init();
     if(!init_mma()){				//Initialize accelerometer hardware
     	while(1);
     }
@@ -97,9 +101,18 @@ int main(void) {
         	PRINTF("STEPS: %d\r\n", step_count);
         	lcd_data_write("STEPS:", LCD_LINE1);
         	lcd_data_write_int(step_count, SAME_LINE);
+        	lcd_data_write("Counting Steps...", LCD_LINE2);
         }
         else{
         	i=0;
+        }
+        if((TSI_Detect()) || (get_flagSwitch())){
+        	step_count = 0;
+        	PRINTF("Pedometer Reseted");
+        	clear_lcd();
+            lcd_data_write("STEPS:", LCD_LINE1);
+            lcd_data_write_int(step_count, SAME_LINE);
+            lcd_data_write("RESET", LCD_LINE2);
         }
     }
     return 0 ;

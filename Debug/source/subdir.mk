@@ -5,32 +5,38 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../source/Course_Project.c \
+../source/button.c \
 ../source/i2c.c \
 ../source/lcd.c \
 ../source/mma8451.c \
 ../source/mtb.c \
 ../source/semihost_hardfault.c \
 ../source/timer.c \
+../source/tsi.c \
 ../source/utility.c 
 
 OBJS += \
 ./source/Course_Project.o \
+./source/button.o \
 ./source/i2c.o \
 ./source/lcd.o \
 ./source/mma8451.o \
 ./source/mtb.o \
 ./source/semihost_hardfault.o \
 ./source/timer.o \
+./source/tsi.o \
 ./source/utility.o 
 
 C_DEPS += \
 ./source/Course_Project.d \
+./source/button.d \
 ./source/i2c.d \
 ./source/lcd.d \
 ./source/mma8451.d \
 ./source/mtb.d \
 ./source/semihost_hardfault.d \
 ./source/timer.d \
+./source/tsi.d \
 ./source/utility.d 
 
 

@@ -34,9 +34,8 @@ In order to get the complete functionality of the device we would implement all 
 • ```Course_Project.c```: This file contains the main script which forms the application entry point to the pedometer. The file contains the function in the infinite loop to check the detection of the step and print the required message on the display.  
 
 ### Software Flow  
-```
 ![SOFTWARE_FLOW_DIAGRAM][SOFTWARE_FLOW_DIAGRAM]
-```
+
 
 ## Hardware Requirements  
 o FRDM-KL25Z Evaluation Board  
@@ -46,9 +45,8 @@ o MMA8451Q - Accelerometer (On-board accelerometer)
 o Header connectors for evaluation board  
 
 ## System Flow  
-```
 ![SYSTEM_FLOW][SYSTEM_FLOW]  
-```
+
 
 ## Manual Test Routine  
 To test the system, user can refer to the manual test case routine. The steps should be followed to visually check the functionality of the system. The test should be done on the ```Debug``` build to verify from the debug logs.   

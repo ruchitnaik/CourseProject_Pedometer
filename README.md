@@ -35,7 +35,7 @@ In order to get the complete functionality of the device we would implement all 
 
 ### Software Flow  
 ```
-[SOFTWARE_FLOW_DIAGRAM][!SOFTWARE_FLOW_DIAGRAM]
+![SOFTWARE_FLOW_DIAGRAM][SOFTWARE_FLOW_DIAGRAM]
 ```
 
 ## Hardware Requirements  
@@ -47,7 +47,7 @@ o Header connectors for evaluation board
 
 ## System Flow  
 ```
-[SYSTEM_FLOW][!SYSTEM_FLOW]  
+![SYSTEM_FLOW][SYSTEM_FLOW]  
 ```
 
 ## Manual Test Routine  
@@ -62,5 +62,5 @@ Find the images of the working code posted below.
 
 
 
-[!SOFTWARE_FLOW_DIAGRAM]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Flow%20Diagrams/Software%20Design%20Flow%20Diagram.drawio.png 
-[!SYSTEM_FLOW]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Flow%20Diagrams/System%20Block%20Diagram.drawio.png
+[SOFTWARE_FLOW_DIAGRAM]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Flow%20Diagrams/Software%20Design%20Flow%20Diagram.drawio.png 
+[SYSTEM_FLOW]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Flow%20Diagrams/System%20Block%20Diagram.drawio.png

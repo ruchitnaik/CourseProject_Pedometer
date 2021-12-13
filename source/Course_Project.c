@@ -99,9 +99,12 @@ int main(void) {
     start_lcd();
     lcd_data_write("PEDOMETER", LCD_LINE1);
     lcd_data_write("Version 1.0", LCD_LINE2);
-	lcd_cmd(0x01);								//Clear display
-	delay(1000);
+    delay(2000);
+    clear_lcd();								//Clear display
 	lcd_data_write("Counting Steps...", LCD_LINE2);
+	lcd_data_write("PEDOMETER", LCD_LINE1);
+	delay(2000);
+	clear_lcd();
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */

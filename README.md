@@ -54,11 +54,20 @@ To test the system, user can refer to the manual test case routine. The steps sh
 Refer to the test document [here](https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Documentation/Manual%20Test%20Routine%20Guide.pdf).
 
 ## Project Demo  
-Please click on the link to access the video demo of the project [here]().  
+Please click on the link to access the video demo of the project [here](https://drive.google.com/drive/folders/1E2aAY-J0PgqauToglKZw84UG0EAovVQV?usp=sharing).  
 
 Find the images of the working code posted below.  
-
+The LCD Display essentially has 3 screens which are listed below:  
+- LCD Screen 1  
+![LCD_SCREEN_1][LCD_SCREEN_1]  
+- LCD Screen 2  
+![LCD_SCREEN_2][LCD_SCREEN_2]  
+- LCD Screen 3  
+![LCD_SCREEN_3][LCD_SCREEN_3]
 
 
 [SOFTWARE_FLOW_DIAGRAM]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Flow%20Diagrams/Software%20Design%20Flow%20Diagram.drawio.png 
 [SYSTEM_FLOW]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Flow%20Diagrams/System%20Block%20Diagram.drawio.png
+[LCD_SCREEN_1]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/LCD%20Screen%201.jpg
+[LCD_SCREEN_2]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/LCD%20Screen%202.jpg
+[LCD_SCREEN_3]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/LCD%20Screen%203.jpg

@@ -63,7 +63,15 @@ The LCD Display essentially has 3 screens which are listed below:
 - LCD Screen 2  
 ![LCD_SCREEN_2][LCD_SCREEN_2]  
 - LCD Screen 3  
-![LCD_SCREEN_3][LCD_SCREEN_3]
+![LCD_SCREEN_3][LCD_SCREEN_3]  
+
+The firmware implements the calibration routine before actually detecting the steps based on the accelerometer's readings. The calibration is displayed on the debug terminal window which can be depicted below.  
+![DEBUG_TERMINAL][DEBUG_TERMINAL]
+
+The overall system flow of the pedometer implementation is displayed by the below screenshot.  
+![PEDOMETER_DEMO][PEDOMETER_DEMO]
+
+
 
 
 [SOFTWARE_FLOW_DIAGRAM]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Flow%20Diagrams/Software%20Design%20Flow%20Diagram.drawio.png 
@@ -71,3 +79,5 @@ The LCD Display essentially has 3 screens which are listed below:
 [LCD_SCREEN_1]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/LCD%20Screen%201.jpg
 [LCD_SCREEN_2]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/LCD%20Screen%202.jpg
 [LCD_SCREEN_3]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/LCD%20Screen%203.jpg
+[DEBUG_TERMINAL]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Calibration%20Test.png
+[PEDOMETER_DEMO]: https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Screen%20Shots/Pedometer%20Test.jpg

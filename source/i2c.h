@@ -1,5 +1,5 @@
 /*
- * i2c.c
+ * i2c.h
  *
  *  Created on: Nov 29, 2021
  *      Author: Ruchit Naik

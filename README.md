@@ -51,6 +51,32 @@ o Header connectors for evaluation board
 ## Manual Test Routine  
 To test the system, user can refer to the manual test case routine. The steps should be followed to visually check the functionality of the system. The test should be done on the ```Debug``` build to verify from the debug logs. The ```Release``` build is the final build which would not print any debug logs.  
 
+Follow the below mentioned connections on the FRDM-KL25Z board to interface other peripheral hardware.
+- 16x2 LCD Connections  
+```
+|------------------|------------------|
+| FRDM Board       | 16x2 LCD Display |
+|------------------|------------------|
+| PTC7(J1-Pin 1)   | LCD_DB7 (Pin 14) |  
+| PTC0(J1-Pin 3)   | LCD_DB6 (Pin13)  |  
+| PTC3(J1-Pin 5)   | LCD_DB5 (Pin12)  |
+| PTC4(J1-Pin 7)   | LCD_DB4 (Pin11)  |
+| PTC5(J1-Pin 9)   | LCD_E (Pin6)     |
+| PTC6(J1-Pin 11)  | LCD_RW (Pin5)    |  
+| PTC10(J1-Pin 13) | LCD_RS (Pin4)    |
+|------------------|------------------|
+  
+5V VCC(J9-Pin 10) -> LCD_VCC (Pin 2), LCD_L+(Pin 15)  
+GND(J9-Pin 12) -> LCD_VSS (Pin 1), LCD_L-(Pin 16)  
+GND(J9-Pin 12) -> Potentiometer(Pin 3)  
+5V VCC(J9-Pin 10) -> Potentiometer(Pin 1)  
+```
+- External Push Button Connections  
+```
+PTA5 (Pin 12) -> Push Button  
+```
+
+
 Refer to the test document [here](https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Documentation/Manual%20Test%20Routine%20Guide.pdf).
 
 ## Project Demo  

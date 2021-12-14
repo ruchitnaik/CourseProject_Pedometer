@@ -54,7 +54,6 @@ To test the system, user can refer to the manual test case routine. The steps sh
 Follow the below mentioned connections on the FRDM-KL25Z board to interface other peripheral hardware.
 - 16x2 LCD Connections  
 ```
-|------------------|------------------|
 | FRDM Board       | 16x2 LCD Display |
 |------------------|------------------|
 | PTC7(J1-Pin 1)   | LCD_DB7 (Pin 14) |  
@@ -64,7 +63,6 @@ Follow the below mentioned connections on the FRDM-KL25Z board to interface othe
 | PTC5(J1-Pin 9)   | LCD_E (Pin6)     |
 | PTC6(J1-Pin 11)  | LCD_RW (Pin5)    |  
 | PTC10(J1-Pin 13) | LCD_RS (Pin4)    |
-|------------------|------------------|
   
 5V VCC(J9-Pin 10) -> LCD_VCC (Pin 2), LCD_L+(Pin 15)  
 GND(J9-Pin 12) -> LCD_VSS (Pin 1), LCD_L-(Pin 16)  

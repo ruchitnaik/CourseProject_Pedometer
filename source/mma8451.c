@@ -105,11 +105,17 @@ void calibrate(int16_t *xval, int16_t *yval, int16_t *zval, int *xavg, int *yavg
 	}
 	delay(100);
 	*xavg = sum/100;
+#ifdef DEBUG
 	printf("avg X: %d\r\n", *xavg);
+#endif
 
 	*yavg = sum1/100;
+#ifdef DEBUG
 	printf("avg Y: %d\r\n", *yavg);
+#endif
 
 	*zavg = sum2/100;
+#ifdef DEBUG
 	printf("avg Z: %d\r\n", *zavg);
+#endif
 }

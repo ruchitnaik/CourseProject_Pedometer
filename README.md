@@ -49,7 +49,7 @@ o Header connectors for evaluation board
 
 
 ## Manual Test Routine  
-To test the system, user can refer to the manual test case routine. The steps should be followed to visually check the functionality of the system. The test should be done on the ```Debug``` build to verify from the debug logs.   
+To test the system, user can refer to the manual test case routine. The steps should be followed to visually check the functionality of the system. The test should be done on the ```Debug``` build to verify from the debug logs. The ```Release``` build is the final build which would not print any debug logs.  
 
 Refer to the test document [here](https://github.com/ruchitnaik/CourseProject_Pedometer/blob/master/Documentation/Manual%20Test%20Routine%20Guide.pdf).
 

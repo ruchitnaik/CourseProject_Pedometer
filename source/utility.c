@@ -45,7 +45,9 @@ uint16_t detect_step(uint16_t count, int i){
 						(acc_y - yavg)) + ((acc_z - zavg) * (acc_z - zavg)));
 
 	total_avg[i] = (total_vect[i] + total_vect[i - 1]) / 2 ;
+#ifdef DEBUG
 	printf("Movement val: %d\r\n", total_avg[i]);
+#endif
 	delay(100);
 	if(((total_avg[i]>STEP_THRESHOLD)/*||((total_avg[i]-total_avg[i-1])>STEP_CHANGE_THRESHOLD)*/)
 			&& (step_flag == false)){
